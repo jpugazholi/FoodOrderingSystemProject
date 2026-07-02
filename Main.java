@@ -18,6 +18,29 @@ class FoodItem {
         return price;
     }
 }
+class MainCourse extends FoodItem {
+    public MainCourse(String name, int price) {
+        super(name, price);
+    }
+}
+
+class Snack extends FoodItem {
+    public Snack(String name, int price) {
+        super(name, price);
+    }
+}
+
+class Drink extends FoodItem {
+    public Drink(String name, int price) {
+        super(name, price);
+    }
+}
+
+class Dessert extends FoodItem {
+    public Dessert(String name, int price) {
+        super(name, price);
+    }
+}
 
 class Order {
     private FoodItem item;
@@ -31,9 +54,8 @@ class Order {
     public int getAmount() {
         return item.getPrice() * quantity;
     }
-
-    public void displayOrder() {
-        System.out.println(item.getName() + " x " + quantity + " = Rs" + getAmount());
+    public void displayOrder(){
+        System.out.println(item.getName()+" x "+quantity+" = Rs "+getAmount());
     }
 }
 
@@ -52,12 +74,19 @@ class FoodOrderingSystem {
     }
 
     public void displayBill() {
+        if(orders.isEmpty()){
+    System.out.println("No items in cart.");
+    return;
+}
+int orderId=(int)(Math.random()*9000)+1000;
         System.out.println();
         System.out.println("Your order is placed successfully.....");
         System.out.println("Thank you for your order!");
         System.out.println();
         System.out.println("=================================");
         System.out.println("           ORDER BILL");
+        System.out.println("=================================");
+        System.out.println("Order ID : WOW"+orderId);
         System.out.println("=================================");
 
         for (Order order : orders) {
@@ -78,34 +107,41 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Welcome to WOW CART!!!");
         System.out.println();
-        System.out.println("#Every cravings deservs a WOW...");
+        System.out.println("#Every craving deserves a WOW...");
         System.out.println();
         Scanner sc = new Scanner(System.in);
         FoodOrderingSystem system = new FoodOrderingSystem();
         
-        FoodItem burger = new FoodItem("Burger", 120);
-        FoodItem pizza = new FoodItem("Pizza", 299);
-        FoodItem briyani = new FoodItem("Briyani", 250);
-        FoodItem pasta = new FoodItem("Pasta",199 );
-        FoodItem friedrice = new FoodItem("Friedrice", 180);
-        FoodItem frenchfries = new FoodItem("FrenchFries",99 );
-        FoodItem friedchicken = new FoodItem("FriedChicken",229 );
-        FoodItem sandwich = new FoodItem("Sandwich",119 );
-        FoodItem nuggets = new FoodItem("Nuggets",150 );
-        FoodItem cookies = new FoodItem("Cookies",69 );
-        FoodItem cococola = new FoodItem("Cococola",49 );
-        FoodItem pepsi = new FoodItem("Pepsi",49 );
-        FoodItem sprite = new FoodItem("Sprite",49 );
-        FoodItem coffee = new FoodItem("Coffee",89 );
-        FoodItem tea = new FoodItem("Tea",49 );
-        FoodItem icecream = new FoodItem("Icecream",99 );  
-        FoodItem chocolatecake = new FoodItem("ChocolateCake",149);
-        FoodItem browine = new FoodItem("Browine",130 );
-        FoodItem cheesecake = new FoodItem("Cheesecake", 300);
-        FoodItem donut = new FoodItem("Donut", 80);
+        FoodItem burger = new MainCourse("Burger",120);
+        FoodItem pizza = new MainCourse("Pizza",299);
+        FoodItem briyani = new MainCourse("Biryani",250);
+        FoodItem pasta = new MainCourse("Pasta",199);
+        FoodItem friedrice = new MainCourse("Fried Rice",180);
 
-       
+        FoodItem frenchfries = new Snack("French Fries",99);
+        FoodItem friedchicken = new Snack("Fried Chicken",229);
+        FoodItem sandwich = new Snack("Sandwich",119);
+        FoodItem nuggets = new Snack("Nuggets",150);
+        FoodItem cookies = new Snack("Cookies",69);
 
+        FoodItem cococola = new Drink("Coca-Cola",49);
+        FoodItem pepsi = new Drink("Pepsi",49);
+        FoodItem sprite = new Drink("Sprite",49);
+        FoodItem coffee = new Drink("Coffee",89);
+        FoodItem tea = new Drink("Tea",49);
+
+        FoodItem icecream = new Dessert("Ice Cream",99);
+        FoodItem chocolatecake = new Dessert("Chocolate Cake",149);
+        FoodItem browine = new Dessert("Brownie",130);
+        FoodItem cheesecake = new Dessert("Cheese Cake",300);
+        FoodItem donut = new Dessert("Donut",80);
+        
+        FoodItem[] menu = {
+    burger,pizza,briyani,pasta,friedrice,
+    frenchfries,friedchicken,sandwich,nuggets,cookies,
+    cococola,pepsi,sprite,coffee,tea,
+    icecream,chocolatecake,browine,cheesecake,donut
+};
         char more='y';
 
         do {
@@ -114,7 +150,7 @@ public class Main {
             System.out.println("=================================");
             System.out.println("1. Burger      - 120rs");
             System.out.println("2. Pizza       - 299rs");
-            System.out.println("3. Briyani     - 250rs");
+            System.out.println("3. Biryani     - 250rs");
             System.out.println("4. Pasta       - 199rs");
             System.out.println("5. Fried Rice  - 180rs");
             System.out.println("=================================");
@@ -139,7 +175,7 @@ public class Main {
             System.out.println("16.Ice-Cream      - 99rs");
             System.out.println("17.Chocolate Cake - 149rs");
             System.out.println("18.Brownie        - 130rs");
-            System.out.println("19.Chease Cake    - Rs:300/per pac");
+            System.out.println("19.Cheese Cake    - Rs:300/per pac");
             System.out.println("20.Donut          - 80rs");
             System.out.println("21.Exit");
             System.out.print("Enter the food you would like to have:");
@@ -151,149 +187,35 @@ public class Main {
                 System.exit(0);
             }
 
-            switch (choice) {
-                case 1:
-                    System.out.println("You Have Choosen burger...");
-                    break;
-                case 2:
-                    System.out.println("You Have Choosen pizza...");
-                    break;
-                case 3:
-                    System.out.println("You Have Choosen briyani...");
-                    break;
-                case 4:
-                    System.out.println("You Have Choosen pasta...");
-                    break;
-                case 5:
-                    System.out.println("You Have Choosen fried rice...");  
-                    break;
-                case 6:
-                    System.out.println("You Have Choosen french fries...");
-                    break;
-                case 7:
-                    System.out.println("You Have Choosen fried chicken...");
-                    break;
-                case 8:
-                    System.out.println("You Have Choosen sandwich...");
-                    break;
-                case 9:
-                    System.out.println("You Have Choosen nuggets...");
-                    break;
-                case 10:
-                    System.out.println("You Have Choosen cookies...");
-                    break;
-                case 11:
-                    System.out.println("You Have Choosen coco...");
-                    break;
-                case 12:
-                    System.out.println("You Have Choosen pepsi...");
-                    break;
-                case 13:
-                    System.out.println("You Have Choosen sprite...");
-                    break;
-                case 14:
-                    System.out.println("You Have Choosen coffee...");
-                    break;
-                case 15:
-                    System.out.println("You Have Choosen tea...");
-                    break;
-                case 16:
-                    System.out.println("You Have Choosen icecream...");
-                    break;
-                case 17:
-                    System.out.println("You Have Choosen chocolate cake...");
-                    break;
-                case 18:
-                    System.out.println("You Have Choosen browine...");
-                    break; 
-                case 19:  
-                    System.out.println("You Have Choosen cheese cake...");
-                    break;
-                case 20:  
-                    System.out.println("You Have Choosen donut...");
-                    break;
-                default:
-                    System.out.println("Invalid Choice!");
-                    System.exit(0);
-                }
+            if(choice>=1 && choice<=20){
+    System.out.println("You have chosen " + menu[choice-1].getName()+"...");
+}
+else{
+    System.out.println("Invalid Choice!");
+    continue;
+}
 
             System.out.print("How Much Do You Like To Have???:");
             int qty = sc.nextInt();
+            if(qty<=0){
+    System.out.println("Quantity should be greater than zero...");
+    continue;
+}
 
-            switch (choice) {
-                case 1:
-                    system.addOrder(burger, qty);
-                    break;
-                case 2:
-                    system.addOrder(pizza, qty);
-                    break;
-                case 3:
-                    system.addOrder(briyani, qty);
-                    break;
-                case 4:
-                    system.addOrder(pasta, qty);
-                    break;
-                case 5:
-                    system.addOrder(friedrice, qty);
-                    break;
-                case 6:
-                    system.addOrder(frenchfries, qty);
-                    break;
-                case 7:
-                    system.addOrder(friedchicken, qty);
-                    break;
-                case 8:
-                    system.addOrder(sandwich, qty);
-                    break;
-                case 9:
-                    system.addOrder(nuggets, qty);
-                    break;
-                case 10:
-                    system.addOrder(cookies, qty);
-                    break;
-                case 11:
-                    system.addOrder(cococola, qty);
-                    break;
-                case 12:
-                    system.addOrder(pepsi, qty);
-                    break;
-                case 13:
-                    system.addOrder(sprite, qty);
-                    break;
-                case 14:
-                    system.addOrder(coffee, qty);
-                    break;
-                case 15:
-                    system.addOrder(tea, qty);
-                    break;
-                case 16:
-                    system.addOrder(icecream, qty);
-                    break;
-                case 17:
-                    system.addOrder(chocolatecake, qty);
-                    break;
-                case 18:
-                    system.addOrder(browine, qty);
-                    break;
-                case 19:
-                    system.addOrder(cheesecake, qty);
-                    break;
-                case 20:
-                    system.addOrder(donut, qty);
-                    break;
-                
-                default:
-                    System.out.println("Invalid Choice!");
-                    continue;
-            }
+            system.addOrder(menu[choice-1], qty);
            
-            System.out.print("Do you want to taste anything more intresting? (Y/N): ");
+            System.out.print("Do you want to taste anything more interesting? (Y/N): ");
             more = sc.next().toUpperCase().charAt(0);
 
         } while (more == 'Y');
         System.out.print("Please Enter Your Number:");
-        int num=sc.nextInt();
+        String num=sc.next();
 
-        system.displayBill();
+if(num.length()!=10){
+    System.out.println("Invalid Mobile Number");
+    return;
+}
+        
+system.displayBill();
     }
 }
